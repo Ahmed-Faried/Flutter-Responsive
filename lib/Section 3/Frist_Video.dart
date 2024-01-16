@@ -38,15 +38,26 @@ class _First_UIState extends State<First_UI> {
         ),
         centerTitle: true,
       ),
-      body: const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.0),
+      body:  Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: CustomScrollView(slivers: [
-          SliverToBoxAdapter(
+          const SliverToBoxAdapter(
             child: SizedBox(
               height: 16,
             ),
           ),
-          CustomSliverGrid(),
+          SliverToBoxAdapter(
+            child: LayoutBuilder(
+              builder: (context , constrains) {
+                if(constrains.maxWidth >= 600 ){
+                  return   Text("Tablet Layout");
+                }else{
+                  return CustomSliverGrid();
+
+                }
+              }
+            ),
+          ),
           SliverToBoxAdapter(
             child: SizedBox(
               height: 12,
