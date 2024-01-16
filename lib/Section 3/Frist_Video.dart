@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../Custom_Widgets/CustomDrawer.dart';
+import '../Custom_Widgets/CustomListTablet.dart';
 import '../Custom_Widgets/CustomSliverGrid.dart';
 import '../Custom_Widgets/CustomSliverList.dart';
 
@@ -50,7 +51,7 @@ class _First_UIState extends State<First_UI> {
             child: LayoutBuilder(
               builder: (context , constrains) {
                 if(constrains.maxWidth >= 600 ){
-                  return   Text("Tablet Layout");
+                  return   CustomListTablet();
                 }else{
                   return CustomSliverGrid();
 
