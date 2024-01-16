@@ -5,6 +5,8 @@ import '../Custom_Widgets/CustomDrawer.dart';
 import '../Custom_Widgets/CustomListTablet.dart';
 import '../Custom_Widgets/CustomSliverGrid.dart';
 import '../Custom_Widgets/CustomSliverList.dart';
+import '../Custom_Widgets/MobileLayout.dart';
+import '../Custom_Widgets/TabletLayout.dart';
 
 class First_UI extends StatefulWidget {
   const First_UI({super.key});
@@ -19,12 +21,7 @@ class _First_UIState extends State<First_UI> {
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey() ;
 
   Widget build(BuildContext context) {
-    return LayoutBuilder(
 
-      builder: (context , constrains) {
-        if (constrains.maxWidth > 1000) {
-          return Text("PC Layout");
-        } else {
           return Scaffold(
             key: scaffoldKey,
             drawer: const CustomDrawer(),
@@ -45,40 +42,18 @@ class _First_UIState extends State<First_UI> {
               ),
               centerTitle: true,
             ),
-            body: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.0),
-              child: CustomScrollView(slivers: [
-                const SliverToBoxAdapter(
-                  child: SizedBox(
-                    height: 16,
-                  ),
-                ),
-                SliverToBoxAdapter(
-                  child: LayoutBuilder(
-                      builder: (context, constrains) {
-                        if ((constrains.maxWidth <= 600)) {
-                          return CustomSliverGrid();
-                        }
-                        else if ((constrains.maxWidth > 600) && (constrains
-                            .maxWidth <= 1000)) {
-                          return CustomListTablet();
-                        } else{
-                          return Text("error");
-                        }
-                      }
-                  ),
-                ),
-                SliverToBoxAdapter(
-                  child: SizedBox(
-                    height: 12,
-                  ),
-                ),
-                CustomSliverList(),
-              ]),
+            body: LayoutBuilder(
+              builder: (context , constraints) {
+                if(constraints.maxWidth <= 600){
+                  return const Mobile_Layout();
+
+                }else{
+                  return const Tablet_Layout();
+
+                }
+              }
             ),
           );
         }
-      }
-    );
+
   }
-}
